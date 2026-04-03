@@ -1,11 +1,11 @@
 package study.ch12.Ex;
 
-class Student {
+class Student1 {
     String name;
     int age;
     double gpa;
 
-    Student(String name, int age, double gpa) {
+    Student1(String name, int age, double gpa) {
         this.name = name;
         this.age = age;
         this.gpa = gpa;
@@ -20,7 +20,7 @@ class Student {
 
 public class Ex07 {
     public static void main(String[] args) {
-        Student s = new Student("김자바", 20, 3.8);
+        Student1 s = new Student1("김자바", 20, 3.8);
 
         // System.out.println(객체) 하면 자동으로 toString()이 호출됨
         System.out.println(s);

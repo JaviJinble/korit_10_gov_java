@@ -1,5 +1,13 @@
 package study.ch12.Ex;
-
+/**
+ * ### 문제 1. 기본 상속 구현
+ *
+ * `Animal` 클래스를 상속하는 `Dog`, `Cat` 클래스를 작성하시오.
+ *
+ * - `Animal`: 필드 `String name`, 생성자, 메서드 `void eat()` → "(이름)이(가) 밥을 먹는다" 출력
+ * - `Dog`: Animal 상속, 필드 `String breed`, 생성자(super), 메서드 `void bark()` → "멍멍!" 출력
+ * - `Cat`: Animal 상속, 필드 `boolean isIndoor`, 생성자(super), 메서드 `void meow()` → "야옹!" 출력
+ * */
 class Animal {
     String name;  // 동물 이름
 
@@ -15,7 +23,7 @@ class Animal {
 }
 
 class Dog extends Animal {
-    String breed;  // 강아지 품종
+    String breed;  // 강아지 품종.
 
     // 자식 생성자
     // super(name)으로 부모의 name 초기화
