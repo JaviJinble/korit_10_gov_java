@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
-
 @Data
 @AllArgsConstructor
 class User {
@@ -18,7 +17,7 @@ class User {
 
 class UserRepository {
     private final User[] users;
-    private Long lastCreatedID = 0l;
+    private Long lastCreatedId = 0l;
 
     public UserRepository() {
         users = new User[100];
@@ -28,7 +27,7 @@ class UserRepository {
         boolean isSuccess = false;
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null) {
-                user.setId(++lastCreatedID);
+                user.setId(++lastCreatedId);
                 users[i] = user;
                 isSuccess = true;
                 break;
@@ -45,8 +44,7 @@ class UserRepository {
 
     public User findByUsername(String username) {
         for (User user : users) {
-                if (user == null) continue;
-
+            if (user == null) continue;
             if (user.getUsername().equals(username)) {
                 return user;
             }
@@ -64,14 +62,12 @@ class UserRepository {
 
 class UserService {
     public int signup(String username, String password) {
-        // 성공 : 200 , 실패: 400(중복 아이디), 500(공간부족)
-        int status = 200;
+        // 성공: 200, 실패: 400(중복 아이디), 500(공간부족)
         UserRepository userRepository = new UserRepository();
         User foundUser = userRepository.findByUsername(username);
         if (foundUser != null) {
             return 400;
         }
-
 
         User newUser = new User(0l, username, password);
         boolean isSuccess = userRepository.addUser(newUser);
@@ -97,7 +93,6 @@ class UserController {
                 break;
             case 500:
                 System.out.println("데이터를 더이상 추가할 수 없습니다.");
-
         }
     }
 }
@@ -113,18 +108,17 @@ public class Static02 {
                 int r = random.nextInt(26) + 97;
                 usernames[i] += (char) r;
             }
-            usernames[i] = "@gmail.com";
+            usernames[i] += "@gmail.com";
             passwords[i] = UUID.randomUUID().toString().replaceAll("-", "");
         }
 
         System.out.println(Arrays.toString(usernames));
         System.out.println(Arrays.toString(passwords));
-        // UserController
+
         UserController userController = new UserController();
         for (int i = 0; i < 500; i++) {
-            UserController.postMapping(usernames[i], passwords[i]);
+            userController.postMapping(usernames[i], passwords[i]);
         }
-
 
     }
 }
