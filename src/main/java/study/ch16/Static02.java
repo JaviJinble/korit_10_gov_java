@@ -19,8 +19,9 @@ class UserRepository {
     private final User[] users;
     private Long lastCreatedId = 0l;
 
-    public UserRepository() {
-        users = new User[100];
+    public UserRepository(User[] users) {
+        this.users = users;
+        //users = new User[100];
     }
 
     public boolean addUser(User user) {
@@ -61,10 +62,17 @@ class UserRepository {
 }
 
 class UserService {
+    private UserRepository userRepository; // 매개변수를 넘겨줘야한다
+                                        // 초기값으로 들어간다
+    public UserService(UserRepository userRepository) { // 의존성을 생성될 때, 받아오겠다
+        this.userRepository = userRepository;
+    }
+
     public int signup(String username, String password) {
         // 성공: 200, 실패: 400(중복 아이디), 500(공간부족)
-        UserRepository userRepository = new UserRepository();
+        //UserRepository userRepository = new UserRepository();
         User foundUser = userRepository.findByUsername(username);
+            // UserService를 userRepository가 의존하고 있다
         if (foundUser != null) {
             return 400;
         }
@@ -81,8 +89,14 @@ class UserService {
 }
 
 class UserController {
+    private UserService userService; // 한번 만 일어난다
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     public void postMapping(String username, String password) {
-        UserService userService = new UserService();
+        //UserService userService = new UserService();
         int status = userService.signup(username, password);
         switch (status) {
             case 200:
@@ -115,11 +129,16 @@ public class Static02 {
         System.out.println(Arrays.toString(usernames));
         System.out.println(Arrays.toString(passwords));
 
-        UserController userController = new UserController();
-        for (int i = 0; i < 500; i++) {
+        User[] users = new User[100];
+        UserRepository userRepository = new UserRepository(users);
+        UserService userService = new UserService(userRepository);
+
+        UserController userController = new UserController(userService);
+        for (int i = 0; i < 100; i++) {
             userController.postMapping(usernames[i], passwords[i]);
         }
 
     }
 }
 // 강사님 git 코드를 보고 코드의 흐름을 이해해서 오기 코드 분석이 이번주 숙제
+// 의존성 주입 연습 중  메인에서 수정만하면 가능케 만든다
