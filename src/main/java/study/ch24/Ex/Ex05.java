@@ -2,7 +2,6 @@ package study.ch24.Ex;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import study.ch23.Student;
 
 import java.util.List;
 import java.util.Map;
@@ -31,15 +30,11 @@ public class Ex05 {
                 Map.of("name", "이파이", "age", 30),
                 Map.of("name", "박고랭", "age", 22)
         );
-// 출력: [김자바, 이파이, 박고랭]
 
-        List<People> peopleList = studentMapList.stream()
-                .map(sm -> new People(
-                        (Integer) sm.get("age"),
-                        (String) sm.get("name"),
-                ))
+        List<String> nameList = people.stream()
+                .map(sm -> (String) sm.get("name"))
                 .toList();
 
-
+        System.out.println(nameList);
     }
 }
