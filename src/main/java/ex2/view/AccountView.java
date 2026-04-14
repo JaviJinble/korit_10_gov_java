@@ -3,8 +3,8 @@ package ex2.view;
 import ex2.router.RouterPath;
 import ex2.router.Routes;
 import ex2.util.Input;
-import ex3.controller.Controller;
-import ex3.dto.ResponseDto;
+import ex2.controller.Controller;
+import ex2.dto.ResponseDto;
 
 public class AccountView implements View{
     @Override

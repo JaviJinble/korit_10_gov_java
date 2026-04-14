@@ -19,9 +19,9 @@ public class Controller {
             } else if ("2".equals(selecteMenu)) {
                 RouterPath.current = Routes.DEPOSIT.name();
             } else if ("3".equals(selecteMenu)) {
-                // RouterPath.current = Routes.WITHDRAWAL.name();
+                RouterPath.current = Routes.WITHDRAW.name();
             } else if ("4".equals(selecteMenu)) {
-                // RouterPath.current = Routes.FIND_ACCOUUNT.name();
+                RouterPath.current = Routes.FIND_ACCOUNT.name();
             } else if ("5".equals(selecteMenu)) {
                 RouterPath.current = Routes.ACCOUNT_LIST.name();
             } else if ("6".equals(selecteMenu)) {
