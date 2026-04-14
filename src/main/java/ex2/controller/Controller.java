@@ -1,8 +1,11 @@
 package ex2.controller;
 
 import ex2.dto.ResponseDto;
+import ex2.entity.Account;
+import ex2.repository.AccountRepositoryImpl;
 import ex2.router.RouterPath;
 import ex2.router.Routes;
+import ex2.util.Input;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +38,31 @@ public class Controller {
             Map<String, Object> errorMap = Map.of(
                     "message", e.getMessage());
             responseDto = new ResponseDto<>(400, errorMap);
+        }
+        return responseDto;
+    }
+
+    public static ResponseDto<?> accountController(String selectedMenu) {
+        ResponseDto<?> responseDto = new ResponseDto<>(200, null);
+        if ("1".equals(selectedMenu)) {
+            // 계좌 생성
+            System.out.println("계좌 생성 각 항목을 작성해주세요.");
+            System.out.println("[계좌번호]");
+            String accountNo = Input.nextLine();
+            System.out.println("[예금주]");
+            String owner = Input.nextLine();
+            System.out.println("[잔액]");
+            int balance = Integer.parseInt(Input.nextLine());
+            Account newAccount = new Account(0, accountNo, owner, balance);
+            Account savedAccount = AccountRepositoryImpl.ACCOUNT_REPOSITORY.save(newAccount);
+            System.out.println("계좌생성완료 - 계좌정보");
+            System.out.println(savedAccount);
+        } else if ("2".equals(selectedMenu)) {
+
+        } else if ("b".equals(selectedMenu)) {
+            responseDto.setStatus(100);
+        } else {
+
         }
         return responseDto;
     }
