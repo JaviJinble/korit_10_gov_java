@@ -16,4 +16,12 @@ public class Input {
             return null;
         }
     }
+
+    public static void nextWait() {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.print("계속 하시려면 아무키나 입력하세요.");
+            bufferedReader.readLine();
+        } catch (IOException e) {}
+    }
 }
